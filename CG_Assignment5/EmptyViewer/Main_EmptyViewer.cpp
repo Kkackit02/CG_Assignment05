@@ -50,7 +50,7 @@ void rasterize_triangle(
 			glm::vec2 b = glm::vec2(v1.x, v1.y);
 			glm::vec2 c = glm::vec2(v2.x, v2.y);
 
-			float denom = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y);
+			float denom = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y); 
 			float beta = ((b.y - c.y) * (p.x - c.x) + (c.x - b.x) * (p.y - c.y)) / denom;
 			float gamma = ((c.y - a.y) * (p.x - c.x) + (a.x - c.x) * (p.y - c.y)) / denom;
 			float alpha = 1.0f - beta - gamma;
@@ -74,13 +74,13 @@ void render()
 	//Instead we draw to another buffer and copy this to the 
 	//framebuffer using glDrawPixels(...) every refresh
 	OutputImage.clear();
-	OutputImage.resize(Width * Height * 3, 0);  //  충분한 크기로 확보
+	OutputImage.resize(Width * Height * 3, 0);  
 	ObjectData data = create_scene();
 	float model[4][4] = {
-	{2, 0, 0, 0},
-	{0, 2, 0, 0},
+	{2, 0, 0,  0},
+	{0, 2, 0,  0},
 	{0, 0, 2, -7},
-	{0, 0, 0, 1}
+	{0, 0, 0,  1}
 	};
 	Camera camera = {
 	{0, 0, 0}, // eye
@@ -90,9 +90,9 @@ void render()
 	};
 
 	float l = -0.1f;
-	float r = 0.1f;
+	float r =  0.1f;
 	float b = -0.1f;
-	float t = 0.1f;
+	float t =  0.1f;
 	float n = -0.1f;
 	float f = -1000;
 	glm::vec3 final;
@@ -138,7 +138,7 @@ void render()
 		}
 
 		// rasterize
-		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f); 
+		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 		rasterize_triangle(OutputImage,
 			screen_vertices[k0],
 			screen_vertices[k1],
@@ -151,7 +151,7 @@ void render()
 
 
 
-void resize_callback(GLFWwindow*, int nw, int nh) 
+void resize_callback(GLFWwindow*, int nw, int nh)
 {
 	//This is called in response to the window resizing.
 	//The new width and height are passed in so we make 
