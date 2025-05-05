@@ -10,7 +10,7 @@ These files serve as **project-specific reports or documentation**.
 ## Getting Started
 
 1) Clone this project (or download it as a ZIP file)
-2) Open `CG_Assignment05/Assignment05/OpenglViewer.sln`<br>
+2) Open `CG_Assignment05/CG_Assignment05/OpenglViewer.sln`<br>
 ![image](https://github.com/user-attachments/assets/eb298e8c-8447-49dd-827f-f7e3f0870b38)
 
 
