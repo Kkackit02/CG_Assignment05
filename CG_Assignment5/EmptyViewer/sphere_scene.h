@@ -3,6 +3,6 @@
 
 #include "Object.h"  
 
-ObjectData create_scene();
+ObjectData create_scene(int height, int width);
 
 #endif // SPHERE_SCENE_H

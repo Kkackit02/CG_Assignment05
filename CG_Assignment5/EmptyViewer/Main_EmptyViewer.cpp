@@ -29,7 +29,7 @@ std::vector<float> OutputImage;
 // -------------------------------------------------
 
 
-
+// non optimized version
 void rasterize_triangle(
 	std::vector<float>& framebuffer,
 	glm::vec3 v0, glm::vec3 v1, glm::vec3 v2,
@@ -41,21 +41,20 @@ void rasterize_triangle(
 	int ymin = std::max(0, (int)std::floor(std::min({ v0.y, v1.y, v2.y })));
 	int ymax = std::min(height - 1, (int)std::ceil(std::max({ v0.y, v1.y, v2.y })));
 
-
-	for (int y = ymin; y <= ymax; ++y) {
-		for (int x = xmin; x <= xmax; ++x) {
+	for (int y = ymin; y <= ymax; y++) {
+		for (int x = xmin; x <= xmax; x++) {
 			glm::vec2 p = glm::vec2(x + 0.5f, y + 0.5f);
 
 			glm::vec2 a = glm::vec2(v0.x, v0.y);
 			glm::vec2 b = glm::vec2(v1.x, v1.y);
 			glm::vec2 c = glm::vec2(v2.x, v2.y);
 
-			float denom = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y); 
+			float denom = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y);
 			float beta = ((b.y - c.y) * (p.x - c.x) + (c.x - b.x) * (p.y - c.y)) / denom;
 			float gamma = ((c.y - a.y) * (p.x - c.x) + (a.x - c.x) * (p.y - c.y)) / denom;
 			float alpha = 1.0f - beta - gamma;
 
-			if (alpha >= 0 && beta >= 0 && gamma >= 0) {
+			if ((beta + gamma) <= 1 && beta >= 0 && gamma >= 0) {
 				int idx = (y * width + x) * 3;
 				if (x >= 0 && x < width && y >= 0 && y < height && idx + 2 < framebuffer.size()) {
 					framebuffer[idx + 0] = color.r;
@@ -65,17 +64,13 @@ void rasterize_triangle(
 			}
 		}
 	}
+
 }
 void render()
 {
-	//Create our image. We don't want to do this in 
-	//the main loop since this may be too slow and we 
-	//want a responsive display of our beautiful image.
-	//Instead we draw to another buffer and copy this to the 
-	//framebuffer using glDrawPixels(...) every refresh
 	OutputImage.clear();
 	OutputImage.resize(Width * Height * 3, 0);  
-	ObjectData data = create_scene();
+	ObjectData data = create_scene(Height, Width);
 	float model[4][4] = {
 	{2, 0, 0,  0},
 	{0, 2, 0,  0},
@@ -124,11 +119,11 @@ void render()
 	}
 	for (int i = 0; i < data.numTriangles; i++)
 	{
+		//인덱스 범위 체크
 		int k0 = data.indexBuffer[3 * i + 0];
 		int k1 = data.indexBuffer[3 * i + 1];
 		int k2 = data.indexBuffer[3 * i + 2];
 
-		// 유효 인덱스인지 확인
 		if (k0 < 0 || k1 < 0 || k2 < 0 ||
 			k0 >= (int)screen_vertices.size() ||
 			k1 >= (int)screen_vertices.size() ||
@@ -137,7 +132,6 @@ void render()
 			continue;
 		}
 
-		// rasterize
 		glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 		rasterize_triangle(OutputImage,
 			screen_vertices[k0],

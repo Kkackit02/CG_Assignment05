@@ -1,8 +1,3 @@
-//
-//  sphere_scene.c
-//  Rasterizer
-//
-//
 
 #include <cmath>  
 #include <cstdio>
@@ -15,11 +10,9 @@ int* gIndexBuffer = NULL; // Vertex indices for the triangles.
 #define M_PI 3.14159265358979323846
 
 
-ObjectData create_scene() {
+ObjectData create_scene(int height , int width) {
 	ObjectData data;
 
-	int width = 32;
-	int height = 16;
 	float theta, phi;
 	int t;
 
