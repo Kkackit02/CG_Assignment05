@@ -5,4 +5,4 @@
 
 ObjectData create_scene(int height, int width);
 
-#endif // SPHERE_SCENE_H
+#endif

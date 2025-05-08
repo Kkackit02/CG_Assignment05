@@ -39,13 +39,10 @@ ObjectData create_scene(int height , int width) {
 		}
 	}
 
-	// 合必
 	data.vertexBuffer[3 * t + 0] = 0;
 	data.vertexBuffer[3 * t + 1] = 1;
 	data.vertexBuffer[3 * t + 2] = 0;
 	t++;
-
-	// 巢必
 	data.vertexBuffer[3 * t + 0] = 0;
 	data.vertexBuffer[3 * t + 1] = -1;
 	data.vertexBuffer[3 * t + 2] = 0;
@@ -65,11 +62,11 @@ ObjectData create_scene(int height , int width) {
 	}
 
 	for (int i = 0; i < width - 1; i++) {
-		data.indexBuffer[t++] = (height - 2) * width;         // 合必
+		data.indexBuffer[t++] = (height - 2) * width;         
 		data.indexBuffer[t++] = i;
 		data.indexBuffer[t++] = i + 1;
 
-		data.indexBuffer[t++] = (height - 2) * width + 1;     // 巢必
+		data.indexBuffer[t++] = (height - 2) * width + 1;    
 		data.indexBuffer[t++] = (height - 3) * width + (i + 1);
 		data.indexBuffer[t++] = (height - 3) * width + i;
 	}

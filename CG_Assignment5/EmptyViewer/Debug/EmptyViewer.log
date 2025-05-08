@@ -11,5 +11,5 @@
   GLM: yaw function returning degrees is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: angle function returning degrees is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
   GLM: angleAxis function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
-D:\Git\CG_Assignment05\CG_Assignment5\EmptyViewer\Main_EmptyViewer.cpp(59,64): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  EmptyViewer.vcxproj -> D:\Git\CG_Assignment05\CG_Assignment5\bin\EmptyViewer.exe
+D:\GitClone\CG_Assignment05\CG_Assignment5\EmptyViewer\Main_EmptyViewer.cpp(59,64): warning C4018: '<': signed/unsigned mismatch
+  EmptyViewer.vcxproj -> D:\GitClone\CG_Assignment05\CG_Assignment5\bin\EmptyViewer.exe
